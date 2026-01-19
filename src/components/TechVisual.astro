@@ -1,6 +1,8 @@
 ---
 ---
-<div id="tech-visual-container"></div>
+<div id="tech-visual-container">
+  <div class="scanline-overlay"></div>
+</div>
 
 <script>
   import * as THREE from 'three';
@@ -12,46 +14,96 @@
   const container = document.getElementById('tech-visual-container');
 
   if (container) {
+    // --- MOBILE DETECTION ---
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
     // --- SCENE SETUP ---
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x000000, 0.05); // Deep fog for infinite depth
 
-    const camera = new THREE.PerspectiveCamera(70, container.clientWidth / container.clientHeight, 0.1, 100);
+    // Adjust FOV for mobile (wider view)
+    const fov = isMobile ? 80 : 70;
+    const camera = new THREE.PerspectiveCamera(fov, container.clientWidth / container.clientHeight, 0.1, 100);
     camera.position.z = 5; 
 
-    const renderer = new THREE.WebGLRenderer({ alpha: false, antialias: false });
+    // Lower pixel ratio on mobile for performance
+    const pixelRatio = isMobile ? 1 : Math.min(window.devicePixelRatio, 2);
+    
+    const renderer = new THREE.WebGLRenderer({ 
+      alpha: false, 
+      antialias: !isMobile // Disable antialiasing on mobile
+    });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(pixelRatio);
     renderer.setClearColor(0x000000, 1); 
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.0;
     container.appendChild(renderer.domElement);
 
     // --- TUNNEL GEOMETRY ---
-    const ringCount = 100; // Denser tunnel
+    const ringCount = isMobile ? 50 : 100;
     const tunnelDepth = 100;
-    const ringGeo = new THREE.TorusGeometry(4, 0.2, 32, 100); // Thicker, larger
-    const ringMat = new THREE.MeshPhysicalMaterial({
-        color: 0xffffff,
-        metalness: 0.9,
-        roughness: 0.2,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.1,
-        emissive: 0x000000,
-    });
-
+    
+    // Create rings with glowing borders
     const rings = [];
     const ringGroup = new THREE.Group();
     scene.add(ringGroup);
 
     for(let i = 0; i < ringCount; i++) {
-        const ring = new THREE.Mesh(ringGeo, ringMat);
+        // Simpler geometry on mobile
+        const segments = isMobile ? 64 : 100;
+        const ringGeo = new THREE.TorusGeometry(3, 0.08, 16, segments);
+        
+        // Extract edges for the glowing border effect
+        const edges = new THREE.EdgesGeometry(ringGeo);
+        
+        // Create line material for neon glow effect
+        const lineMat = new THREE.LineBasicMaterial({
+            color: 0xffffff,  // Start with white
+            linewidth: 2,     // Thicker lines for visibility
+            transparent: true,
+            opacity: 1.0
+        });
+        
+        // Create the glowing border as lines
+        const ring = new THREE.LineSegments(edges, lineMat);
+        
         // Position rings
         const zPos = - (i / ringCount) * tunnelDepth;
         ring.position.z = zPos;
+        
+        // Store metadata for animations
+        ring.userData.initialZ = zPos;
+        ring.userData.index = i;
+        ring.userData.layer = i % 3; // 3 layers with different speeds
+        
         rings.push(ring);
         ringGroup.add(ring);
     }
+
+    // --- PARTICLE SYSTEM (Stars/Dust) ---
+    const particleCount = isMobile ? 200 : 500;
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlePositions = new Float32Array(particleCount * 3);
+    
+    for(let i = 0; i < particleCount; i++) {
+        particlePositions[i * 3] = (Math.random() - 0.5) * 20;     // x
+        particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 20; // y
+        particlePositions[i * 3 + 2] = -Math.random() * tunnelDepth; // z
+    }
+    
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+    
+    const particlesMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.05,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending
+    });
+    
+    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particles);
 
     // --- LIGHTING ---
     const light = new THREE.PointLight(0xffffff, 3, 40);
@@ -74,71 +126,182 @@
         new THREE.Vector2(container.clientWidth, container.clientHeight),
         0.5, 0.4, 0.85
     );
-    bloomPass.strength = 0.8; 
-    bloomPass.radius = 0.3;
-    bloomPass.threshold = 0.2;
+    // Adjust bloom for mobile
+    bloomPass.strength = isMobile ? 1.0 : 1.5;  
+    bloomPass.radius = isMobile ? 0.4 : 0.6;    
+    bloomPass.threshold = isMobile ? 0.15 : 0.1;
     composer.addPass(bloomPass);
 
     const outputPass = new OutputPass();
     composer.addPass(outputPass);
 
+    // --- MOUSE PARALLAX ---
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+    
+    const onMouseMove = (event) => {
+        targetMouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        targetMouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    };
+    
+    if (!isMobile) {
+        window.addEventListener('mousemove', onMouseMove);
+    }
+
     // --- ANIMATION ---
     const clock = new THREE.Clock();
     
-    let scrollProgress = 0;
+    // Helper: Linear Interpolation
+    const lerp = (start, end, t) => start + (end - start) * t;
+    
+    // Scroll State
+    let targetScroll = 0;
+    let smoothScroll = 0;
+    let currentSpeed = 8.0;
+    
+    // Color State (start B&W)
+    let currentHue = 0;
+    let currentSaturation = 0; // Start at 0 for B&W
+    let currentLightness = 0.15;
+    
     const updateScroll = () => {
         const scrollY = window.scrollY;
-        const screenH = window.innerHeight;
-        scrollProgress = Math.min(Math.max(scrollY / screenH, 0), 1);
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        targetScroll = Math.min(Math.max(scrollY / docHeight, 0), 1);
     };
     window.addEventListener('scroll', updateScroll);
+    
+    // Color Mapping Per Section
+    const getSectionColor = (progress) => {
+        // 0-25%: B&W → Cyan
+        if (progress < 0.25) {
+            const t = progress / 0.25;
+            return {
+                hue: 0.5,        // Cyan
+                saturation: t,   // Gradually introduce color
+                lightness: 0.15
+            };
+        }
+        // 25-50%: Cyan → Purple
+        else if (progress < 0.5) {
+            const t = (progress - 0.25) / 0.25;
+            return {
+                hue: lerp(0.5, 0.75, t), // Cyan to Purple
+                saturation: 1.0,
+                lightness: 0.15
+            };
+        }
+        // 50-75%: Purple → Green
+        else if (progress < 0.75) {
+            const t = (progress - 0.5) / 0.25;
+            return {
+                hue: lerp(0.75, 0.33, t), // Purple to Green
+                saturation: 1.0,
+                lightness: 0.15
+            };
+        }
+        // 75-100%: Green → Orange
+        else {
+            const t = (progress - 0.75) / 0.25;
+            return {
+                hue: lerp(0.33, 0.08, t), // Green to Orange
+                saturation: 1.0,
+                lightness: 0.15
+            };
+        }
+    };
 
     const animate = () => {
         requestAnimationFrame(animate);
         const delta = clock.getDelta();
         const time = clock.getElapsedTime();
         
-        // Speed
-        const speed = 1.0 + (scrollProgress * 2.0);
-        
-        // Light Pulse
-        light.intensity = 3 + Math.sin(time * 2) * 0.5;
+        // 1. Smooth Scroll
+        smoothScroll = lerp(smoothScroll, targetScroll, 0.05);
 
-        // Move Rings
-        rings.forEach((ring, index) => {
-            ring.position.z += speed * delta;
+        // 2. Mouse Parallax (smooth camera movement)
+        if (!isMobile) {
+            mouseX = lerp(mouseX, targetMouseX, 0.05);
+            mouseY = lerp(mouseY, targetMouseY, 0.05);
             
-            // Infinite Loop
+            camera.position.x = mouseX * 0.5;
+            camera.position.y = mouseY * 0.5;
+            camera.lookAt(0, 0, 0);
+        }
+
+        // 3. Resolve Color
+        const targetColor = getSectionColor(smoothScroll);
+        currentHue = lerp(currentHue, targetColor.hue, 0.03);
+        currentSaturation = lerp(currentSaturation, targetColor.saturation, 0.03);
+        currentLightness = lerp(currentLightness, targetColor.lightness, 0.03);
+
+        // 4. Speed Control
+        const targetSpeed = 1.0 + (smoothScroll * 2.0); 
+        currentSpeed = lerp(currentSpeed, targetSpeed, 0.05);
+
+        // 5. Dynamic Lighting
+        light.intensity = 3 + Math.sin(time * 2) * 1.0;
+        rimLight.intensity = 1.5 + Math.sin(time * 1.5) * 0.5;
+
+        // 6. Animate Particles (stars/dust moving)
+        const particlePositions = particles.geometry.attributes.position.array;
+        for(let i = 0; i < particleCount; i++) {
+            particlePositions[i * 3 + 2] += currentSpeed * delta * 0.5; // Move particles
+            
+            // Loop particles
+            if(particlePositions[i * 3 + 2] > 5) {
+                particlePositions[i * 3 + 2] = -tunnelDepth;
+            }
+        }
+        particles.geometry.attributes.position.needsUpdate = true;
+
+        // 7. Update Rings with Multi-Layer Speeds & Depth Effects
+        rings.forEach((ring, index) => {
+            // Multi-layer speed (different layers move at different speeds)
+            const layerSpeedMultiplier = 1 + (ring.userData.layer * 0.15);
+            const ringSpeed = currentSpeed * layerSpeedMultiplier;
+            
+            // Movement
+            ring.position.z += ringSpeed * delta;
+            
+            // Loop
             if(ring.position.z > 5) {
                 ring.position.z -= tunnelDepth;
             }
             
-            // Hypnotic Rotation
-            // Alternate rotation direction based on index?
+            // Rotation
             const dir = index % 2 === 0 ? 1 : -1;
             ring.rotation.z += delta * 0.2 * dir;
+            
+            // DEPTH EFFECTS FOR REALISM
+            const distanceFromCamera = Math.abs(ring.position.z - camera.position.z);
+            const normalizedDistance = distanceFromCamera / tunnelDepth;
+            
+            // Perspective Scaling (rings get smaller in distance)
+            const scale = 1 + (normalizedDistance * 0.3);
+            ring.scale.set(scale, scale, scale);
+            
+            // Depth-based Opacity (fade distant rings)
+            const opacity = Math.max(0.2, 1 - (normalizedDistance * 0.8));
+            ring.material.opacity = opacity;
+            
+            // Subtle Floating Motion (adds organic feel)
+            const floatOffset = Math.sin(time * 0.5 + index * 0.1) * 0.05;
+            ring.position.y = floatOffset;
+            ring.position.x = Math.cos(time * 0.3 + index * 0.15) * 0.03;
+            
+            // Color with depth gradient
+            const ringHue = (currentHue + (index * 0.002)) % 1.0;
+            const depthBrightness = currentLightness * (2 + normalizedDistance); // Brighter when closer
+            
+            // Change the line color for the glowing border effect
+            ring.material.color.setHSL(ringHue, currentSaturation, depthBrightness);
         });
-
-        // FADE OUT LOGIC
-        // Smooth fade out as we scroll deep into content
-        const scrollRatio = window.scrollY / window.innerHeight;
-        const fadeStart = 1.2;
-        const fadeEnd = 2.2;
-        let opacity = 1;
         
-        if (scrollRatio > fadeStart) {
-            opacity = 1 - ((scrollRatio - fadeStart) / (fadeEnd - fadeStart));
-            opacity = Math.max(0, opacity);
-        }
-        
-        // Visibility toggle
-        if (opacity < 0.05) {
-            ringGroup.visible = false;
-        } else {
-            ringGroup.visible = true;
-        }
-
-        if (ringGroup.visible) composer.render();
+        // Always visible - no fade out
+        composer.render();
     };
 
     animate();
@@ -167,5 +330,32 @@
     z-index: 0; /* Behind content */
     background: transparent;
     pointer-events: none; /* Let clicks pass */
+  }
+
+  .scanline-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.15) 3px
+    );
+    pointer-events: none;
+    opacity: 0.3;
+    animation: scanline 8s linear infinite;
+  }
+
+  @keyframes scanline {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(10px);
+    }
   }
 </style>
