@@ -1,20 +1,20 @@
 :root {
-  --bg-dark: #030303;
+  --bg-dark: #000000;
   --bg-card: #0a0a0a;
   --text-main: #ffffff;
-  --text-muted: #888888;
+  --text-muted: #ffffff;
 
-  /* Futuristic Accents */
-  --accent-cyan: #00f3ff;
-  --accent-lime: #bfff00;
-  --accent-violet: #bd00ff;
+  /* Monochrome / Silver Accents */
+  --accent-cyan: #e2e2e2;
+  --accent-lime: #ffffff;
+  --accent-violet: #888888;
 
-  --primary-glow: 0 0 20px rgba(0, 243, 255, 0.3);
+  --primary-glow: 0 0 20px rgba(255, 255, 255, 0.2);
 
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Outfit', sans-serif;
 
-  --grid-color: rgba(255, 255, 255, 0.05);
+  --grid-color: rgba(255, 255, 255, 0.03);
   --border-color: rgba(255, 255, 255, 0.1);
 
   --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -66,14 +66,11 @@ html {
 body {
   min-height: 100vh;
   position: relative;
-  background-image:
-    linear-gradient(var(--grid-color) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-  background-size: 50px 50px;
-  background-position: center top;
+  background-color: transparent;
+  /* Show fixed TechVisual */
 }
 
-/* Vignette/Fog */
+/* Vignette/Fog - kept for atmosphere */
 body::before {
   content: '';
   position: fixed;
@@ -116,6 +113,12 @@ h4 {
 .section {
   padding: 8rem 0;
   position: relative;
+  /* Blend section background to make text readable over tunnel if it persists */
+  /* but we want tunnel visible. Use subtle backdrop blur if needed. */
+  /* Actually, since we fade out the tunnel, we assume black bg takes over naturally? */
+  /* Wait, body is transparent. If tunnel fades out, we see... body background? */
+  /* TechVisual has canvas with alpha: false (Step 815 had alpha: false, clearColor 0x000000). */
+  /* So TechVisual IS the background. */
 }
 
 /* Utilities */
@@ -131,7 +134,8 @@ h4 {
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(10, 10, 10, 0.4);
+  /* More transparent */
   backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
 }
@@ -182,7 +186,7 @@ h4 {
 .btn-cyber:hover {
   background: var(--accent-cyan);
   color: var(--bg-dark);
-  box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
 }
 
 ::-webkit-scrollbar {

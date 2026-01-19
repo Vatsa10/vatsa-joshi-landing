@@ -11,6 +11,8 @@
   "dependencies": {
     "@fontsource/outfit": "^5.2.8",
     "@fontsource/space-grotesk": "^5.2.10",
-    "astro": "^5.16.9"
+    "@types/three": "^0.182.0",
+    "astro": "^5.16.9",
+    "three": "^0.182.0"
   }
 }

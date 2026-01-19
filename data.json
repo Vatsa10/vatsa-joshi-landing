@@ -154,7 +154,7 @@
     {
       "name": "Multi Agent Finance Advisor",
       "description": "RAG-based AI system for analyzing financial documents like 10-K/10-Q.",
-      "link": ""
+      "link": "https://github.com/Vatsa10/Financial-Analyzer"
     },
     {
       "name": "Email AI Agent",

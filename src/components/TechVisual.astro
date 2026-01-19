@@ -1,0 +1,171 @@
+---
+---
+<div id="tech-visual-container"></div>
+
+<script>
+  import * as THREE from 'three';
+  import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+  import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+  import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+  import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
+
+  const container = document.getElementById('tech-visual-container');
+
+  if (container) {
+    // --- SCENE SETUP ---
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x000000, 0.05); // Deep fog for infinite depth
+
+    const camera = new THREE.PerspectiveCamera(70, container.clientWidth / container.clientHeight, 0.1, 100);
+    camera.position.z = 5; 
+
+    const renderer = new THREE.WebGLRenderer({ alpha: false, antialias: false });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 1); 
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+    container.appendChild(renderer.domElement);
+
+    // --- TUNNEL GEOMETRY ---
+    const ringCount = 100; // Denser tunnel
+    const tunnelDepth = 100;
+    const ringGeo = new THREE.TorusGeometry(4, 0.2, 32, 100); // Thicker, larger
+    const ringMat = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        metalness: 0.9,
+        roughness: 0.2,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1,
+        emissive: 0x000000,
+    });
+
+    const rings = [];
+    const ringGroup = new THREE.Group();
+    scene.add(ringGroup);
+
+    for(let i = 0; i < ringCount; i++) {
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        // Position rings
+        const zPos = - (i / ringCount) * tunnelDepth;
+        ring.position.z = zPos;
+        rings.push(ring);
+        ringGroup.add(ring);
+    }
+
+    // --- LIGHTING ---
+    const light = new THREE.PointLight(0xffffff, 3, 40);
+    light.position.set(0, 0, 5);
+    scene.add(light);
+    
+    // Blue rim light for depth
+    const rimLight = new THREE.PointLight(0x00f3ff, 1, 50);
+    rimLight.position.set(0, 5, -10);
+    scene.add(rimLight);
+    
+    scene.add(new THREE.AmbientLight(0x111111)); // Dark ambient
+
+    // --- POST-PROCESSING ---
+    const composer = new EffectComposer(renderer);
+    const renderPass = new RenderPass(scene, camera);
+    composer.addPass(renderPass);
+
+    const bloomPass = new UnrealBloomPass(
+        new THREE.Vector2(container.clientWidth, container.clientHeight),
+        0.5, 0.4, 0.85
+    );
+    bloomPass.strength = 0.8; 
+    bloomPass.radius = 0.3;
+    bloomPass.threshold = 0.2;
+    composer.addPass(bloomPass);
+
+    const outputPass = new OutputPass();
+    composer.addPass(outputPass);
+
+    // --- ANIMATION ---
+    const clock = new THREE.Clock();
+    
+    let scrollProgress = 0;
+    const updateScroll = () => {
+        const scrollY = window.scrollY;
+        const screenH = window.innerHeight;
+        scrollProgress = Math.min(Math.max(scrollY / screenH, 0), 1);
+    };
+    window.addEventListener('scroll', updateScroll);
+
+    const animate = () => {
+        requestAnimationFrame(animate);
+        const delta = clock.getDelta();
+        const time = clock.getElapsedTime();
+        
+        // Speed
+        const speed = 1.0 + (scrollProgress * 2.0);
+        
+        // Light Pulse
+        light.intensity = 3 + Math.sin(time * 2) * 0.5;
+
+        // Move Rings
+        rings.forEach((ring, index) => {
+            ring.position.z += speed * delta;
+            
+            // Infinite Loop
+            if(ring.position.z > 5) {
+                ring.position.z -= tunnelDepth;
+            }
+            
+            // Hypnotic Rotation
+            // Alternate rotation direction based on index?
+            const dir = index % 2 === 0 ? 1 : -1;
+            ring.rotation.z += delta * 0.2 * dir;
+        });
+
+        // FADE OUT LOGIC
+        // Smooth fade out as we scroll deep into content
+        const scrollRatio = window.scrollY / window.innerHeight;
+        const fadeStart = 1.2;
+        const fadeEnd = 2.2;
+        let opacity = 1;
+        
+        if (scrollRatio > fadeStart) {
+            opacity = 1 - ((scrollRatio - fadeStart) / (fadeEnd - fadeStart));
+            opacity = Math.max(0, opacity);
+        }
+        
+        // Visibility toggle
+        if (opacity < 0.05) {
+            ringGroup.visible = false;
+        } else {
+            ringGroup.visible = true;
+        }
+
+        if (ringGroup.visible) composer.render();
+    };
+
+    animate();
+
+    // RESIZE
+    window.addEventListener('resize', () => {
+        if (!container) return;
+        const newWidth = container.clientWidth;
+        const newHeight = container.clientHeight;
+        
+        camera.aspect = newWidth / newHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(newWidth, newHeight);
+        composer.setSize(newWidth, newHeight);
+    });
+  }
+</script>
+
+<style>
+  #tech-visual-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0; /* Behind content */
+    background: transparent;
+    pointer-events: none; /* Let clicks pass */
+  }
+</style>
