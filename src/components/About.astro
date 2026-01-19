@@ -11,7 +11,7 @@ import data from '../../data.json';
     <div class="content-grid">
         <div class="bio glass-panel tech-border">
             <p>
-                <span class="highlight">Current Status:</span> {data.work_experience[0].title} at {data.work_experience[0].company}.
+                <span class="highlight">Current Status: Founders Office SE-1 at Promact
             </p>
             <p>
                {data.summary}
@@ -23,11 +23,11 @@ import data from '../../data.json';
                     <span class="stat-label">Years Exp</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-num">{data.projects.length}+</span>
+                    <span class="stat-num">100+</span>
                     <span class="stat-label">Projects</span>
                 </div>
                  <div class="stat">
-                    <span class="stat-num">{data.certifications.length}+</span>
+                    <span class="stat-num">30+</span>
                     <span class="stat-label">Certs</span>
                 </div>
             </div>
@@ -40,13 +40,14 @@ import data from '../../data.json';
                {data.skills.programming_languages.slice(0,4).map(skill => (
                    <li class="skill-item">{skill}</li>
                ))}
-                {data.skills.web_development.slice(0,3).map(skill => (
+                {data.skills.web_development.slice(1,4).map(skill => (
                    <li class="skill-item">{skill}</li>
                ))}
                {data.skills.ai_deep_learning.slice(0,3).map(skill => (
                    <li class="skill-item">{skill}</li>
                ))}
                 <li class="skill-item">PostgreSQL</li>
+                <li class="skill-item">Machine Learning</li>
              </ul>
         </div>
     </div>
