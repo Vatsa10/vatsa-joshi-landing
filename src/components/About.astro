@@ -1,0 +1,165 @@
+---
+import data from '../../data.json';
+---
+<section id="about" class="section about">
+  <div class="container">
+    <div class="header-group">
+        <span class="mono-tag">01 // ABOUT_ME</span>
+        <div class="line"></div>
+    </div>
+    
+    <div class="content-grid">
+        <div class="bio glass-panel tech-border">
+            <p>
+                <span class="highlight">Current Status:</span> {data.work_experience[0].title} at {data.work_experience[0].company}.
+            </p>
+            <p>
+               {data.summary}
+            </p>
+            
+            <div class="stats-row">
+                <div class="stat">
+                    <span class="stat-num">{new Date().getFullYear() - 2023}+</span>
+                    <span class="stat-label">Years Exp</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num">{data.projects.length}+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                 <div class="stat">
+                    <span class="stat-num">{data.certifications.length}+</span>
+                    <span class="stat-label">Certs</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="skills-wrapper">
+             <h3 class="skills-title">Stack_Inventory</h3>
+             <ul class="skills-grid">
+               <!-- Combining top skills from various categories -->
+               {data.skills.programming_languages.slice(0,4).map(skill => (
+                   <li class="skill-item">{skill}</li>
+               ))}
+                {data.skills.web_development.slice(0,3).map(skill => (
+                   <li class="skill-item">{skill}</li>
+               ))}
+               {data.skills.ai_deep_learning.slice(0,3).map(skill => (
+                   <li class="skill-item">{skill}</li>
+               ))}
+                <li class="skill-item">PostgreSQL</li>
+             </ul>
+        </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .header-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 4rem;
+  }
+
+  .mono-tag {
+      font-family: monospace;
+      color: var(--accent-cyan);
+      font-size: 1.1rem;
+  }
+
+  .line {
+      height: 1px;
+      background: var(--border-color);
+      flex: 1;
+  }
+
+  .content-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 4rem;
+  }
+
+  .bio {
+      padding: 3rem;
+      position: relative;
+  }
+  
+  .bio p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+  }
+
+  .highlight {
+      color: #fff;
+      font-weight: 600;
+  }
+
+  .stats-row {
+      display: flex;
+      gap: 4rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 2rem;
+  }
+
+  .stat {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .stat-num {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: #fff;
+      line-height: 1;
+  }
+
+  .stat-label {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      margin-top: 0.5rem;
+  }
+
+  .skills-title {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      border-left: 3px solid var(--accent-cyan);
+      padding-left: 1rem;
+  }
+
+  .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+  }
+
+  .skill-item {
+      padding: 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid transparent;
+      transition: all 0.3s;
+      font-family: monospace;
+      font-size: 0.9rem;
+      cursor: crosshair;
+  }
+
+  .skill-item:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 243, 255, 0.05);
+      transform: translateX(5px);
+  }
+
+  @media (max-width: 768px) {
+      .content-grid {
+          grid-template-columns: 1fr;
+      }
+      
+      .bio {
+          padding: 1.5rem;
+      }
+  }
+
+</style>
