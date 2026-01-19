@@ -160,6 +160,8 @@
     let targetScroll = 0;
     let smoothScroll = 0;
     let currentSpeed = 8.0;
+    let lastScrollY = 0;
+    let scrollDirection = 1; // 1 = down, -1 = up
     
     // Color State (start B&W)
     let currentHue = 0;
@@ -170,6 +172,10 @@
         const scrollY = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         targetScroll = Math.min(Math.max(scrollY / docHeight, 0), 1);
+        
+        // Detect scroll direction
+        scrollDirection = scrollY > lastScrollY ? 1 : -1;
+        lastScrollY = scrollY;
     };
     window.addEventListener('scroll', updateScroll);
     
@@ -248,11 +254,14 @@
         // 6. Animate Particles (stars/dust moving)
         const particlePositions = particles.geometry.attributes.position.array;
         for(let i = 0; i < particleCount; i++) {
-            particlePositions[i * 3 + 2] += currentSpeed * delta * 0.5; // Move particles
+            // Reverse particle movement when scrolling up
+            particlePositions[i * 3 + 2] += currentSpeed * delta * 0.5 * scrollDirection;
             
-            // Loop particles
+            // Loop particles (both directions)
             if(particlePositions[i * 3 + 2] > 5) {
                 particlePositions[i * 3 + 2] = -tunnelDepth;
+            } else if(particlePositions[i * 3 + 2] < -tunnelDepth) {
+                particlePositions[i * 3 + 2] = 5;
             }
         }
         particles.geometry.attributes.position.needsUpdate = true;
@@ -263,17 +272,19 @@
             const layerSpeedMultiplier = 1 + (ring.userData.layer * 0.15);
             const ringSpeed = currentSpeed * layerSpeedMultiplier;
             
-            // Movement
-            ring.position.z += ringSpeed * delta;
+            // Movement - REVERSE when scrolling up for "sucked in" effect
+            ring.position.z += ringSpeed * delta * scrollDirection;
             
-            // Loop
+            // Loop (both directions)
             if(ring.position.z > 5) {
                 ring.position.z -= tunnelDepth;
+            } else if(ring.position.z < -tunnelDepth) {
+                ring.position.z += tunnelDepth;
             }
             
-            // Rotation
+            // Rotation - also reverse when scrolling up
             const dir = index % 2 === 0 ? 1 : -1;
-            ring.rotation.z += delta * 0.2 * dir;
+            ring.rotation.z += delta * 0.2 * dir * scrollDirection;
             
             // DEPTH EFFECTS FOR REALISM
             const distanceFromCamera = Math.abs(ring.position.z - camera.position.z);

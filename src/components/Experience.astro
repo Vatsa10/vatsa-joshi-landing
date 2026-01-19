@@ -142,4 +142,41 @@ import data from '../../data.json';
       color: var(--text-muted);
       line-height: 1.6;
   }
+
+  /* Mobile & Tablet Responsive */
+  @media (max-width: 768px) {
+    .timeline-marker {
+      width: 12px;
+      height: 12px;
+      left: -6px;
+    }
+
+    .timeline-content {
+      padding: 1.5rem;
+      margin-left: 1.5rem;
+    }
+
+    .date-badge {
+      font-size: 0.75rem;
+    }
+
+    .role-title {
+      font-size: 1.25rem;
+    }
+
+    .role-desc {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .timeline-content {
+      padding: 1.25rem;
+      margin-left: 1rem;
+    }
+
+    .role-title {
+      font-size: 1.1rem;
+    }
+  }
 </style>
