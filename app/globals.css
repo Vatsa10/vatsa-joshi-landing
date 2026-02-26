@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-secondary: var(--secondary);
+  --color-neutral-bg: var(--neutral-bg);
+  --font-satoshi: "Satoshi", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --font-weight-thin: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #FAFAFA;
+  --foreground: #1A1A1A;
+  --accent: #007AFF;
+  --secondary: #1A1A1A;
+  --neutral-bg: #F2F2F2;
+
+  --nav-blur: rgba(250, 250, 250, 0.8);
 }
 
+/* Force light mode/white theme behavior since user wants full white theme */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-satoshi);
+  font-weight: 300;
+  /* Default to Slim */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--foreground);
+  font-weight: 400;
+  /* Regular for headers instead of bold */
+  letter-spacing: -0.04em;
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-md border border-foreground/5 bg-white/40;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-bg);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }
