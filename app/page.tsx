@@ -10,7 +10,9 @@ export default function Home() {
 
       <header className="rail">
         <div className="rail-inner">
-          <span className="mono-mark">VJ</span>
+          <a href="/" className="mono-mark" aria-label="Vatsa Joshi — home">
+            <span className="mark-box">VJ</span>
+          </a>
           <span className="availability"><span className="dot"></span></span>
           <nav>
             <a href="#about" data-n="01">About</a>
@@ -42,7 +44,10 @@ export default function Home() {
         aria-hidden="true"
       >
         <div className="drawer-head">
-          <span className="drawer-eyebrow">Menu</span>
+          <a href="/" className="mono-mark drawer-mark" aria-label="Vatsa Joshi — home">
+            <span className="mark-box">VJ</span>
+            <span className="drawer-eyebrow">Menu</span>
+          </a>
           <button
             className="drawer-close"
             id="drawerClose"
