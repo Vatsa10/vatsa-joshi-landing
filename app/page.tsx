@@ -73,6 +73,7 @@ export default function Home() {
         </div>
       </aside>
 
+      <main>
       {/* HERO */}
       <section className="hero wrap" id="home">
         <div className="hero-meta">
@@ -563,6 +564,7 @@ export default function Home() {
           <span><a href="#home">Back to top ↑</a></span>
         </footer>
       </section>
+      </main>
 
       <PortfolioClient />
     </>
