@@ -277,9 +277,9 @@ export default function Home() {
         </div>
 
         <div className="filters reveal" id="filters">
-          <button className="chip active" data-filter="all">All <span className="c">[14]</span></button>
-          <button className="chip" data-filter="agents">Agents <span className="c">[05]</span></button>
-          <button className="chip" data-filter="rag">RAG &amp; Memory <span className="c">[04]</span></button>
+          <button className="chip active" data-filter="all">All <span className="c">[16]</span></button>
+          <button className="chip" data-filter="agents">Agents <span className="c">[06]</span></button>
+          <button className="chip" data-filter="rag">RAG &amp; Memory <span className="c">[05]</span></button>
           <button className="chip" data-filter="fine-tuning">Fine-tuning <span className="c">[03]</span></button>
           <button className="chip" data-filter="vision">Vision / Mobile <span className="c">[02]</span></button>
         </div>
@@ -326,6 +326,14 @@ export default function Home() {
             <div className="p-tags"><span className="p-tag">LangGraph</span><span className="p-tag">LLM</span><span className="p-tag">WhatsApp</span></div>
           </a>
 
+          <a className="p-card" data-cat="agents" href="https://github.com/Vatsa10/TradeXpert" target="_blank" rel="noopener">
+            <div className="p-top"><span className="p-num">P · 15</span><span className="p-cat">Agents</span></div>
+            <div className="p-arrow">↗</div>
+            <div className="p-desc">Enterprise financial analytics platform — four-agent orchestration (ingestion, quantitative, qualitative, synthesis) generating deep equity reports with event-driven workflows.</div>
+            <div className="p-title">TradeXpert</div>
+            <div className="p-tags"><span className="p-tag">Multi-Agent</span><span className="p-tag">Gemini</span><span className="p-tag">Inngest</span></div>
+          </a>
+
           {/* RAG / Memory / Document Intelligence */}
           <a className="p-card" data-cat="rag" href="https://github.com/Vatsa10/" target="_blank" rel="noopener">
             <div className="p-top"><span className="p-num">P · 06</span><span className="p-cat">RAG &amp; Memory</span></div>
@@ -357,6 +365,14 @@ export default function Home() {
             <div className="p-desc">Voice-first AI email assistant — read, summarize, star, and compose your inbox via natural conversation. Hands-free.</div>
             <div className="p-title">Email Voice AI</div>
             <div className="p-tags"><span className="p-tag">LangGraph</span><span className="p-tag">Deepgram</span><span className="p-tag">Gmail API</span></div>
+          </a>
+
+          <a className="p-card" data-cat="rag" href="https://github.com/Vatsa10/NyayCheck" target="_blank" rel="noopener">
+            <div className="p-top"><span className="p-num">P · 16</span><span className="p-cat">RAG &amp; Memory</span></div>
+            <div className="p-arrow">↗</div>
+            <div className="p-desc">Mobile-first legal health platform for Indian citizens — rule-based scoring, RAG-powered Q&amp;A, AI document generation, and web-grounded lawyer search in Hindi + English.</div>
+            <div className="p-title">NyayCheck</div>
+            <div className="p-tags"><span className="p-tag">Next.js</span><span className="p-tag">RAG</span><span className="p-tag">Turso · Drizzle</span></div>
           </a>
 
           {/* Fine-tuning */}
