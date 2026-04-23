@@ -138,6 +138,12 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <a href="#about" className="scroll-hint" aria-label="Scroll to about section">
+          <span className="scroll-hint-label">Scroll</span>
+          <span className="scroll-hint-line" aria-hidden="true"></span>
+          <span className="scroll-hint-arrow" aria-hidden="true">↓</span>
+        </a>
       </section>
 
       {/* ABOUT */}

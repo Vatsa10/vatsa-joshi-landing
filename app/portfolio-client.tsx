@@ -134,6 +134,20 @@ export default function PortfolioClient() {
     drawerLinks.forEach((a) => a.addEventListener("click", onDrawerLinkClick));
     document.addEventListener("keydown", onKeyDown);
 
+    // ─── scroll hint fade on hero exit ───
+    const scrollHint = document.querySelector<HTMLElement>(".scroll-hint");
+    const hero = document.getElementById("home");
+    let heroIo: IntersectionObserver | null = null;
+    if (scrollHint && hero) {
+      heroIo = new IntersectionObserver(
+        ([entry]) => {
+          scrollHint.classList.toggle("is-hidden", !entry.isIntersecting || entry.intersectionRatio < 0.25);
+        },
+        { threshold: [0, 0.25, 0.5, 1] }
+      );
+      heroIo.observe(hero);
+    }
+
     return () => {
       if (cursorAttached) {
         window.removeEventListener("mousemove", onMove);
@@ -150,6 +164,7 @@ export default function PortfolioClient() {
       drawerLinks.forEach((a) => a.removeEventListener("click", onDrawerLinkClick));
       document.removeEventListener("keydown", onKeyDown);
       document.body.classList.remove("nav-open");
+      heroIo?.disconnect();
     };
   }, []);
 
