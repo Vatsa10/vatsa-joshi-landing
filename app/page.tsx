@@ -32,8 +32,59 @@ export default function Home() {
           >
             <span className="bar" aria-hidden="true"></span>
           </button>
+          <div className="rail-socials" aria-label="Social links">
+            <a
+              href="https://www.linkedin.com/in/vatsa-joshi/"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
+              </svg>
+            </a>
+            <a
+              href="https://github.com/Vatsa10"
+              target="_blank"
+              rel="noopener"
+              aria-label="GitHub"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .3a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .1-.78.41-1.31.75-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.86.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.21.69.82.58A12 12 0 0 0 12 .3" />
+              </svg>
+            </a>
+          </div>
         </div>
       </header>
+
+      {/* Left edge social rail — fixed, desktop only */}
+      <aside className="edge-rail" aria-label="Social links">
+        <a
+          className="edge-link"
+          href="https://www.linkedin.com/in/vatsa-joshi/"
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn — Vatsa Joshi"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+            <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
+          </svg>
+          <span className="edge-label">LinkedIn</span>
+        </a>
+        <a
+          className="edge-link"
+          href="https://github.com/Vatsa10"
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub — Vatsa10"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+            <path d="M12 .3a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .1-.78.41-1.31.75-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.86.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.21.69.82.58A12 12 0 0 0 12 .3" />
+          </svg>
+          <span className="edge-label">GitHub</span>
+        </a>
+        <span className="edge-spine" aria-hidden="true" />
+      </aside>
 
       {/* Mobile drawer */}
       <div className="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
@@ -122,8 +173,25 @@ export default function Home() {
             <div style={{ fontWeight: 500 }}>vatsa.agent</div>
             <div style={{ color: "var(--muted)", marginTop: 4 }}>status: idle · 04:12 UTC</div>
           </div>
-          <div>
-            <div className="agent-label">Stream</div>
+          <div className="agent-stream">
+            <div className="agent-label agent-label-row">
+              <span>Stream</span>
+              <svg
+                className="signal-bars"
+                width="26"
+                height="12"
+                viewBox="0 0 26 12"
+                aria-hidden="true"
+              >
+                <rect x="0" y="4" width="2" height="8" />
+                <rect x="4" y="2" width="2" height="10" />
+                <rect x="8" y="0" width="2" height="12" />
+                <rect x="12" y="3" width="2" height="9" />
+                <rect x="16" y="1" width="2" height="11" />
+                <rect x="20" y="5" width="2" height="7" />
+                <rect x="24" y="3" width="2" height="9" />
+              </svg>
+            </div>
             <div className="agent-log" id="agentLog" suppressHydrationWarning>
               <div className="line"><span className="tok">&gt;</span> boot orchestrator.py ...</div>
             </div>
@@ -574,15 +642,15 @@ export default function Home() {
             <span className="k">GitHub</span>
             <span className="v">@Vatsa10 ↗</span>
           </a>
-          <a className="contact-link" href="https://vatsajoshi.in" target="_blank" rel="noopener">
-            <span className="k">Web</span>
-            <span className="v">vatsajoshi.in ↗</span>
+          <a className="contact-link" href="https://www.linkedin.com/in/vatsa10/" target="_blank" rel="noopener">
+            <span className="k">LinkedIn</span>
+            <span className="v">in/vatsa10 ↗</span>
           </a>
         </div>
 
         <footer>
           <span>© Vatsa Joshi · 2026</span>
-          <span>Built in Vadodara · Last deploy 04/2026</span>
+          <span>Built in Vadodara · Last deploy 05/2026</span>
           <span><a href="#home">Back to top ↑</a></span>
         </footer>
       </section>

@@ -169,6 +169,7 @@ const personJsonLd = {
   telephone: "+91-97375-57799",
   sameAs: [
     "https://github.com/Vatsa10",
+    "https://www.linkedin.com/in/vatsa-joshi",
     "https://vatsajoshi.in",
   ],
 };
@@ -198,13 +199,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script
           id="ld-person"
           type="application/ld+json"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <Script
           id="ld-website"
           type="application/ld+json"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </body>
