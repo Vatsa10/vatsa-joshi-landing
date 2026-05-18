@@ -1,4 +1,5 @@
 import PortfolioClient from "./portfolio-client";
+import HeroNeural from "./hero-neural";
 
 const RESUME_URL = "/uploads/VatsaJoshi_Resume.pdf";
 
@@ -127,10 +128,14 @@ export default function Home() {
       <main>
       {/* HERO */}
       <section className="hero wrap" id="home">
-        <div className="hero-meta">
-          <div className="left">№ 001 — Portfolio / 2026</div>
-          <div className="mid">Vadodara · 22.307° N, 73.181° E</div>
-          <div className="right">Updated 04 · 2026</div>
+        <HeroNeural />
+        <div className="hero-canvas-meta" aria-hidden="true">
+          <span className="hcm-cell"><span className="hcm-k">model</span><span className="hcm-v">vatsa-llm · 7B</span></span>
+          <span className="hcm-cell"><span className="hcm-k">ctx</span><span className="hcm-v">128k</span></span>
+          <span className="hcm-cell"><span className="hcm-k">layers</span><span className="hcm-v">[4·6·7·6·4]</span></span>
+          <span className="hcm-cell"><span className="hcm-k">temp</span><span className="hcm-v">0.42</span></span>
+          <span className="hcm-cell"><span className="hcm-k">tok/s</span><span className="hcm-v" id="tokRate" suppressHydrationWarning>142</span></span>
+          <span className="hcm-cell"><span className="hcm-k">clock</span><span className="hcm-v" id="hcClock" suppressHydrationWarning>00:00:00</span></span>
         </div>
 
         <h1 className="display word-reveal">

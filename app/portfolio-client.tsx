@@ -56,6 +56,29 @@ export default function PortfolioClient() {
     );
     document.querySelectorAll(".reveal, .word-reveal").forEach((el) => io.observe(el));
 
+    // ─── hero canvas clock + tok/s ticker ───
+    const hcClockEl = document.getElementById("hcClock");
+    const tokRateEl = document.getElementById("tokRate");
+    const pad = (n: number) => n.toString().padStart(2, "0");
+    const tickHcClock = () => {
+      if (!hcClockEl) return;
+      const now = new Date();
+      const ist = new Date(now.getTime() + (now.getTimezoneOffset() + 330) * 60000);
+      hcClockEl.textContent = `${pad(ist.getHours())}:${pad(ist.getMinutes())}:${pad(ist.getSeconds())}`;
+    };
+    tickHcClock();
+    const clockInterval = setInterval(tickHcClock, 1000);
+
+    let tokBase = 142;
+    const tickTokRate = () => {
+      if (!tokRateEl) return;
+      tokBase += Math.round((Math.random() - 0.5) * 18);
+      if (tokBase < 96) tokBase = 96 + Math.floor(Math.random() * 10);
+      if (tokBase > 198) tokBase = 198 - Math.floor(Math.random() * 10);
+      tokRateEl.textContent = String(tokBase);
+    };
+    const tokInterval = setInterval(tickTokRate, 380);
+
     // ─── hero agent log — simulated stream ───
     const log = document.getElementById("agentLog");
     const lines = [
@@ -156,6 +179,8 @@ export default function PortfolioClient() {
         cancelAnimationFrame(rafId);
       }
       io.disconnect();
+      clearInterval(clockInterval);
+      clearInterval(tokInterval);
       if (logInterval) clearInterval(logInterval);
       filters?.removeEventListener("click", onFilterClick);
       toggleBtn?.removeEventListener("click", onToggleClick);
