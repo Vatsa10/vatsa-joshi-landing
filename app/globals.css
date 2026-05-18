@@ -971,8 +971,27 @@ section.block{padding-top:90px;padding-bottom:90px;position:relative}
 
 .projects-grid{
   margin-top:28px;display:grid;grid-template-columns:repeat(12,1fr);gap:0;
-  border-top:1px solid var(--ink);border-left:1px solid var(--ink);
+  border-top:1px solid var(--ink);
+  border-left:1px solid var(--ink);
+  border-bottom:1px solid var(--ink);
   perspective:1400px;
+  background:linear-gradient(to right,
+    transparent 0,
+    transparent calc(33.3333% - 1px),
+    var(--ink) calc(33.3333% - 1px),
+    var(--ink) 33.3333%,
+    transparent 33.3333%,
+    transparent calc(66.6666% - 1px),
+    var(--ink) calc(66.6666% - 1px),
+    var(--ink) 66.6666%,
+    transparent 66.6666%,
+    transparent calc(100% - 1px),
+    var(--ink) calc(100% - 1px),
+    var(--ink) 100%
+  );
+}
+.projects-grid > .p-card:last-child:nth-child(3n+1){
+  grid-column:5 / span 4;
 }
 .p-card{
   grid-column:span 4;
@@ -991,8 +1010,32 @@ section.block{padding-top:90px;padding-bottom:90px;position:relative}
 .p-card:hover .p-tag{border-color:var(--paper);color:var(--paper)}
 .p-card:hover .p-num,.p-card:hover .p-cat{color:var(--paper)}
 .p-card:hover .p-arrow{transform:translate(4px,-4px)}
-@media (max-width:900px){ .p-card{grid-column:span 6} }
-@media (max-width:560px){ .p-card{grid-column:span 12} }
+@media (max-width:900px){
+  .p-card{grid-column:span 6}
+  .projects-grid > .p-card:last-child:nth-child(3n+1){grid-column:span 6}
+  .projects-grid > .p-card:last-child:nth-child(2n+1){grid-column:4 / span 6}
+  .projects-grid{
+    background:linear-gradient(to right,
+      transparent 0,
+      transparent calc(50% - 1px),
+      var(--ink) calc(50% - 1px),
+      var(--ink) 50%,
+      transparent 50%,
+      transparent calc(100% - 1px),
+      var(--ink) calc(100% - 1px),
+      var(--ink) 100%
+    );
+  }
+}
+@media (max-width:560px){
+  .p-card{grid-column:span 6;min-height:auto;padding:16px 14px;gap:10px}
+  .p-card .p-title{font-size:18px}
+  .p-card .p-desc{font-size:11px;line-height:1.5}
+  .p-card .p-tag{font-size:8.5px;padding:2px 5px}
+  .p-card .p-top{padding-right:22px}
+  .p-card .p-arrow{top:14px;right:12px;font-size:14px}
+  .projects-grid > .p-card:last-child:nth-child(2n+1){grid-column:4 / span 6}
+}
 
 .p-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding-right:28px}
 .p-num{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--muted)}
@@ -1040,6 +1083,15 @@ section.block{padding-top:90px;padding-bottom:90px;position:relative}
 .award h3{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.01em;margin:0;text-transform:uppercase;line-height:1.1}
 .award p{font-family:var(--mono);font-size:12px;line-height:1.55;margin:0;color:#1a1a1a}
 .award .meta{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:auto}
+.award-link{transition:background .2s, transform .2s, border-color .2s;cursor:pointer}
+.award-link:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);transform:translateY(-2px)}
+.award-link:hover h3,
+.award-link:hover p,
+.award-link:hover p b{color:var(--paper)}
+.award-link:hover .meta{color:var(--paper);opacity:.85}
+.award-link:hover .trophy{color:var(--accent)}
+.award-arrow{display:inline-block;margin-left:6px;font-family:var(--mono);font-weight:400;transition:transform .2s}
+.award-link:hover .award-arrow{transform:translate(3px,-3px);color:var(--accent)}
 
 /* ───────── contact ───────── */
 .contact{padding-top:120px;padding-bottom:60px;position:relative}

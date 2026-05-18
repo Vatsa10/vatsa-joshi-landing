@@ -280,6 +280,7 @@ export default function Home() {
               </p>
               <ul className="bullets">
                 <li>Built end-to-end AI-driven Document Management Systems — translation, parsing, indexing, retrieval across 22+ languages.</li>
+                <li>Cut legal NER extraction cost 25× — from 1/doc to 6-7 paisa — for an 80-lakh Indian court judgment corpus.Replaced a 7-stage LLM pipeline with a 2-call Gemini-2.5-Flash-Lite architecture.</li>
                 <li>Shipped a multi-agent <b>Petition Writer</b> that drafts structured legal petitions from case inputs, with iterative human-in-the-loop clarification before the final draft.</li>
                 <li>Designed a legal intelligence platform with judge profiling, case-brief-driven litigation strategy, and lawyer compatibility analysis — agents coordinating vector similarity, LLM reasoning, and live web search.</li>
               </ul>
@@ -356,10 +357,10 @@ export default function Home() {
         </div>
 
         <div className="filters reveal" id="filters">
-          <button className="chip active" data-filter="all">All <span className="c">[16]</span></button>
-          <button className="chip" data-filter="agents">Agents <span className="c">[06]</span></button>
+          <button className="chip active" data-filter="all">All <span className="c">[19]</span></button>
+          <button className="chip" data-filter="agents">Agents <span className="c">[08]</span></button>
           <button className="chip" data-filter="rag">RAG &amp; Memory <span className="c">[05]</span></button>
-          <button className="chip" data-filter="fine-tuning">Fine-tuning <span className="c">[03]</span></button>
+          <button className="chip" data-filter="fine-tuning">Fine-tuning <span className="c">[04]</span></button>
           <button className="chip" data-filter="vision">Vision / Mobile <span className="c">[02]</span></button>
         </div>
 
@@ -406,16 +407,32 @@ export default function Home() {
           </a>
 
           <a className="p-card" data-cat="agents" href="https://github.com/Vatsa10/TradeXpert" target="_blank" rel="noopener">
-            <div className="p-top"><span className="p-num">P · 15</span><span className="p-cat">Agents</span></div>
+            <div className="p-top"><span className="p-num">P · 06</span><span className="p-cat">Agents</span></div>
             <div className="p-arrow">↗</div>
             <div className="p-desc">Enterprise financial analytics platform — four-agent orchestration (ingestion, quantitative, qualitative, synthesis) generating deep equity reports with event-driven workflows.</div>
             <div className="p-title">TradeXpert</div>
             <div className="p-tags"><span className="p-tag">Multi-Agent</span><span className="p-tag">Gemini</span><span className="p-tag">Inngest</span></div>
           </a>
 
+          <a className="p-card" data-cat="agents" href="https://github.com/Vatsa10/fn-gemma" target="_blank" rel="noopener">
+            <div className="p-top"><span className="p-num">P · 07</span><span className="p-cat">Agents</span></div>
+            <div className="p-arrow">↗</div>
+            <div className="p-desc">Hybrid AI router orchestrating on-device FunctionGemma-270M with Gemini 2.5 Flash Lite — 99% function-calling accuracy under 550ms across 30 cases. 3-tier pre-routing, post-process cleanup, multi-intent handling.</div>
+            <div className="p-title">fn-gemma Router</div>
+            <div className="p-tags"><span className="p-tag">FunctionGemma</span><span className="p-tag">Gemini 2.5</span><span className="p-tag">Hybrid</span></div>
+          </a>
+
+          <a className="p-card" data-cat="agents" href="https://github.com/Vatsa10/Deep-Research" target="_blank" rel="noopener">
+            <div className="p-top"><span className="p-num">P · 08</span><span className="p-cat">Agents</span></div>
+            <div className="p-arrow">↗</div>
+            <div className="p-desc">Multi-agent deep research service on AgentScope. Custom async DAG executor, MoE query routing, hybrid Qdrant/Turso memory, parallel ReAct web-agents, fact-checker + critic loop with up to 3 re-plan iterations.</div>
+            <div className="p-title">Deep Research</div>
+            <div className="p-tags"><span className="p-tag">AgentScope</span><span className="p-tag">DAG · MoE</span><span className="p-tag">Qdrant</span></div>
+          </a>
+
           {/* RAG / Memory / Document Intelligence */}
           <a className="p-card" data-cat="rag" href="https://github.com/Vatsa10/" target="_blank" rel="noopener">
-            <div className="p-top"><span className="p-num">P · 06</span><span className="p-cat">RAG &amp; Memory</span></div>
+            <div className="p-top"><span className="p-num">P · 09</span><span className="p-cat">RAG &amp; Memory</span></div>
             <div className="p-arrow">↗</div>
             <div className="p-desc">Enterprise legal document parser — 22+ language OCR, RAG-ready semantic chunking, and Elasticsearch indexing.</div>
             <div className="p-title">LegalOCR</div>
@@ -423,7 +440,7 @@ export default function Home() {
           </a>
 
           <a className="p-card" data-cat="rag" href="https://github.com/Vatsa10/" target="_blank" rel="noopener">
-            <div className="p-top"><span className="p-num">P · 07</span><span className="p-cat">RAG &amp; Memory</span></div>
+            <div className="p-top"><span className="p-num">P · 10</span><span className="p-cat">RAG &amp; Memory</span></div>
             <div className="p-arrow">↗</div>
             <div className="p-desc">Multi-channel AI memory unifying conversations across web, WhatsApp, email, and phone with probabilistic identity linking.</div>
             <div className="p-title">Synapse</div>
@@ -431,7 +448,7 @@ export default function Home() {
           </a>
 
           <a className="p-card" data-cat="rag" href="https://github.com/Vatsa10/Financial-Analyzer" target="_blank" rel="noopener">
-            <div className="p-top"><span className="p-num">P · 08</span><span className="p-cat">RAG &amp; Memory</span></div>
+            <div className="p-top"><span className="p-num">P · 11</span><span className="p-cat">RAG &amp; Memory</span></div>
             <div className="p-arrow">↗</div>
             <div className="p-desc">Multi-agent system converting financial documents — 10-K / 10-Q, SEC filings, earnings transcripts — into actionable intelligence.</div>
             <div className="p-title">Finance Advisor</div>
@@ -439,7 +456,7 @@ export default function Home() {
           </a>
 
           <a className="p-card" data-cat="rag" href="https://github.com/Vatsa10/" target="_blank" rel="noopener">
-            <div className="p-top"><span className="p-num">P · 09</span><span className="p-cat">RAG &amp; Memory</span></div>
+            <div className="p-top"><span className="p-num">P · 12</span><span className="p-cat">RAG &amp; Memory</span></div>
             <div className="p-arrow">↗</div>
             <div className="p-desc">Voice-first AI email assistant — read, summarize, star, and compose your inbox via natural conversation. Hands-free.</div>
             <div className="p-title">Email Voice AI</div>
@@ -447,7 +464,7 @@ export default function Home() {
           </a>
 
           <a className="p-card" data-cat="rag" href="https://github.com/Vatsa10/NyayCheck" target="_blank" rel="noopener">
-            <div className="p-top"><span className="p-num">P · 16</span><span className="p-cat">RAG &amp; Memory</span></div>
+            <div className="p-top"><span className="p-num">P · 13</span><span className="p-cat">RAG &amp; Memory</span></div>
             <div className="p-arrow">↗</div>
             <div className="p-desc">Mobile-first legal health platform for Indian citizens — rule-based scoring, RAG-powered Q&amp;A, AI document generation, and web-grounded lawyer search in Hindi + English.</div>
             <div className="p-title">NyayCheck</div>
@@ -456,7 +473,7 @@ export default function Home() {
 
           {/* Fine-tuning */}
           <a className="p-card" data-cat="fine-tuning" href="https://github.com/Vatsa10/" target="_blank" rel="noopener">
-            <div className="p-top"><span className="p-num">P · 10</span><span className="p-cat">Fine-tuning</span></div>
+            <div className="p-top"><span className="p-num">P · 14</span><span className="p-cat">Fine-tuning</span></div>
             <div className="p-arrow">↗</div>
             <div className="p-desc">Fine-tuned Qwen3.5-0.8B on 1.5k Hindi → Gujarati pairs using ZeRO-2/3 multi-GPU distributed training.</div>
             <div className="p-title">Hindi2Guj</div>
@@ -464,7 +481,7 @@ export default function Home() {
           </a>
 
           <a className="p-card" data-cat="fine-tuning" href="https://github.com/Vatsa10/Gemma3-Finetune" target="_blank" rel="noopener">
-            <div className="p-top"><span className="p-num">P · 11</span><span className="p-cat">Fine-tuning</span></div>
+            <div className="p-top"><span className="p-num">P · 15</span><span className="p-cat">Fine-tuning</span></div>
             <div className="p-arrow">↗</div>
             <div className="p-desc">Fine-tuned Gemma 3 (4B) on FineTome-100k for enhanced instruction-following via LoRA / QLoRA on a single Colab T4.</div>
             <div className="p-title">Gemma 3 Tune</div>
@@ -472,16 +489,24 @@ export default function Home() {
           </a>
 
           <a className="p-card" data-cat="fine-tuning" href="https://github.com/Vatsa10/Rustformer" target="_blank" rel="noopener">
-            <div className="p-top"><span className="p-num">P · 12</span><span className="p-cat">Fine-tuning</span></div>
+            <div className="p-top"><span className="p-num">P · 16</span><span className="p-cat">Fine-tuning</span></div>
             <div className="p-arrow">↗</div>
             <div className="p-desc">Complete transformer architecture implemented from scratch in Rust, for performance-focused inference research.</div>
             <div className="p-title">Rustformer</div>
             <div className="p-tags"><span className="p-tag">Rust</span><span className="p-tag">Transformer</span><span className="p-tag">From Scratch</span></div>
           </a>
 
+          <a className="p-card" data-cat="fine-tuning" href="https://github.com/Vatsa10/autoslm" target="_blank" rel="noopener">
+            <div className="p-top"><span className="p-num">P · 17</span><span className="p-cat">Fine-tuning</span></div>
+            <div className="p-arrow">↗</div>
+            <div className="p-desc">Open-source re-implementation of Pioneer Agent (arXiv:2604.09791, Fastino Labs). Closed-loop autonomous system for continually improving SLMs in production — LLM agent diagnoses failures, synthesizes corrective curriculum, retrains under regression constraints. PEFT + TRL, multi-provider via LiteLLM.</div>
+            <div className="p-title">AutoSLM</div>
+            <div className="p-tags"><span className="p-tag">PEFT · TRL</span><span className="p-tag">LiteLLM</span><span className="p-tag">Self-Improving</span></div>
+          </a>
+
           {/* Vision / Mobile */}
           <a className="p-card" data-cat="vision" href="https://github.com/Vatsa10/" target="_blank" rel="noopener">
-            <div className="p-top"><span className="p-num">P · 13</span><span className="p-cat">Vision / Mobile</span></div>
+            <div className="p-top"><span className="p-num">P · 18</span><span className="p-cat">Vision / Mobile</span></div>
             <div className="p-arrow">↗</div>
             <div className="p-desc">2nd place at Tinkerthon 3.0 + 1-year SSIP Gujarat research grant. Fine-tuned DL models for deepfake video classification.</div>
             <div className="p-title">Deepfake Detector</div>
@@ -489,12 +514,13 @@ export default function Home() {
           </a>
 
           <a className="p-card" data-cat="vision" href="https://github.com/Vatsa10/" target="_blank" rel="noopener">
-            <div className="p-top"><span className="p-num">P · 14</span><span className="p-cat">Vision / Mobile</span></div>
+            <div className="p-top"><span className="p-num">P · 19</span><span className="p-cat">Vision / Mobile</span></div>
             <div className="p-arrow">↗</div>
             <div className="p-desc">Mobile health app that translates lab reports into plain language — with fully on-device medical transformer inference.</div>
             <div className="p-title">AarogyaKosh</div>
             <div className="p-tags"><span className="p-tag">React Native</span><span className="p-tag">FastAPI</span><span className="p-tag">On-device</span></div>
           </a>
+
         </div>
       </section>
 
@@ -603,6 +629,17 @@ export default function Home() {
             <p>Survey paper exploring blockchain architecture, cryptographic foundations, and cross-industry applications.<br />DOI: 10.13140/RG.2.2.32465.75365</p>
             <span className="meta">Publication · ResearchGate</span>
           </div>
+          <a
+            className="award award-link"
+            href="https://ieeexplore.ieee.org/document/11486188"
+            target="_blank"
+            rel="noopener"
+          >
+            <div className="trophy">¶</div>
+            <h3>EfficientNetB7 &amp; Bi-LSTM for Deepfake Detection <span className="award-arrow">↗</span></h3>
+            <p>Hybrid spatial-temporal pipeline for deepfake video classification — EfficientNetB7 frame features fed into a Bi-LSTM for sequence-level reasoning. <b>First author.</b></p>
+            <span className="meta">Publication · IEEE Xplore · 2025</span>
+          </a>
           <div className="award">
             <div className="trophy">❝</div>
             <h3>Self-Adaptive Context RAG</h3>
