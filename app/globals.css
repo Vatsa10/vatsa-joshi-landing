@@ -917,6 +917,7 @@ section.block{padding-top:90px;padding-bottom:90px;position:relative}
 .now-left .bullets{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
 .now-left .bullets li{font-family:var(--mono);font-size:12.5px;line-height:1.55;display:flex;gap:12px;padding-left:0}
 .now-left .bullets li::before{content:"→";color:var(--accent);flex-shrink:0}
+.now-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
 
 .now-right{padding:36px;background:var(--paper-2);display:flex;flex-direction:column;gap:20px}
 .now-right .product{

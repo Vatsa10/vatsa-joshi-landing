@@ -260,40 +260,49 @@ export default function Home() {
       <section className="block wrap" id="now">
         <div className="section-head reveal">
           <span className="num">02 — NOW</span>
-          <h2>What I&apos;m <span className="serif">shipping</span><br />right now.</h2>
-          <div className="meta">Jan 2026 → Present<br />Promact, Vadodara</div>
+          <h2>Between builds. <span className="serif">Looking</span><br />for what&apos;s next.</h2>
+          <div className="meta">Wrapped at Promact<br />Open to roles · 2026</div>
         </div>
 
         <div className="now-wrap reveal">
           <div className="now-tape" aria-hidden="true">
             <div className="ticker">
-              <span>Legal AI</span><span>Multi-agent systems</span><span>Document intelligence</span><span>Vector search</span><span>Human-in-the-loop</span><span>Judge profiling</span><span>Petition drafting</span>
-              <span>Legal AI</span><span>Multi-agent systems</span><span>Document intelligence</span><span>Vector search</span><span>Human-in-the-loop</span><span>Judge profiling</span><span>Petition drafting</span>
+              <span>● Available</span><span>Open to full-time roles</span><span>AI Engineer</span><span>Agentic systems</span><span>RAG · Fine-tuning</span><span>Remote / Hybrid / Relocate</span><span>Reach out ↗</span>
+              <span>● Available</span><span>Open to full-time roles</span><span>AI Engineer</span><span>Agentic systems</span><span>RAG · Fine-tuning</span><span>Remote / Hybrid / Relocate</span><span>Reach out ↗</span>
             </div>
           </div>
           <div className="now-grid">
             <div className="now-left">
-              <div className="role">Software <span className="serif">Engineer</span><br />Trainee<span style={{ color: "var(--accent)" }}>.</span></div>
-              <div className="where">Promact · Vadodara · AI Division</div>
+              <div className="role">Looking for the<br /><span className="serif">next</span> build<span style={{ color: "var(--accent)" }}>.</span></div>
+              <div className="where">Tenure complete · Promact · 2026</div>
               <p>
-                Contributing to <b>BharatLaw.ai</b> — an AI-powered legal technology product serving Indian law firms. Designing the AI systems that read, understand, and draft across millions of legal documents.
+                Just wrapped my tenure at <b>Promact</b> contributing to <b>BharatLaw.ai</b> — designing AI systems that read, parse, and draft across millions of Indian legal documents. Now open to full-time AI engineering roles where I can keep shipping agentic systems and production-grade LLM infra.
               </p>
               <ul className="bullets">
                 <li>Built end-to-end AI-driven Document Management Systems — translation, parsing, indexing, retrieval across 22+ languages.</li>
-                <li>Cut legal NER extraction cost 25× — from 1/doc to 6-7 paisa — for an 80-lakh Indian court judgment corpus.Replaced a 7-stage LLM pipeline with a 2-call Gemini-2.5-Flash-Lite architecture.</li>
-                <li>Shipped a multi-agent <b>Petition Writer</b> that drafts structured legal petitions from case inputs, with iterative human-in-the-loop clarification before the final draft.</li>
-                <li>Designed a legal intelligence platform with judge profiling, case-brief-driven litigation strategy, and lawyer compatibility analysis — agents coordinating vector similarity, LLM reasoning, and live web search.</li>
+                <li>Cut legal NER extraction cost 25× — from ₹1/doc to 6-7 paisa — across an 80-lakh Indian court judgment corpus. Replaced a 7-stage LLM pipeline with a 2-call Gemini-2.5-Flash-Lite architecture.</li>
+                <li>Shipped a multi-agent <b>Petition Writer</b> drafting structured legal petitions from case inputs, with iterative human-in-the-loop clarification.</li>
+                <li>Designed a legal intelligence platform — judge profiling, case-brief-driven litigation strategy, lawyer compatibility analysis — agents coordinating vector similarity, LLM reasoning, and live web search.</li>
               </ul>
+              <div className="now-cta">
+                <a className="btn primary" href="mailto:vatsajoshi2@gmail.com?subject=Role%20Opportunity">
+                  Hire me <span className="arrow">→</span>
+                </a>
+                <a className="btn" href={RESUME_URL} target="_blank" rel="noopener">
+                  Résumé <span className="arrow">↗</span>
+                </a>
+              </div>
             </div>
             <div className="now-right">
-              <div className="product"><small>Flagship product</small>BharatLaw.ai</div>
+              <div className="product"><small>Status</small>Open to opportunities</div>
               <div className="spec-list">
-                <div className="r"><span className="k">Company</span><span className="v">Promact Infotech</span></div>
-                <div className="r"><span className="k">Role</span><span className="v">Software Engineer Trainee (AI)</span></div>
-                <div className="r"><span className="k">Started</span><span className="v">January 2026</span></div>
-                <div className="r"><span className="k">Domain</span><span className="v">Legal-tech, multi-agent AI</span></div>
-                <div className="r"><span className="k">Stack</span><span className="v">Python, FastAPI, LangGraph, Elasticsearch, PostgreSQL</span></div>
-                <div className="r"><span className="k">Scope</span><span className="v">End-to-end AI systems</span></div>
+                <div className="r"><span className="k">Seeking</span><span className="v">AI Engineer · Full-time</span></div>
+                <div className="r"><span className="k">Focus</span><span className="v">Agentic systems · RAG · LLM infra</span></div>
+                <div className="r"><span className="k">Stack</span><span className="v">Python · TypeScript · Rust</span></div>
+                <div className="r"><span className="k">Last role</span><span className="v">SWE Trainee (AI), Promact · Jan–2026 → ended</span></div>
+                <div className="r"><span className="k">Location</span><span className="v">Vadodara · open to relocate</span></div>
+                <div className="r"><span className="k">Mode</span><span className="v">On-site · Hybrid · Remote</span></div>
+                <div className="r"><span className="k">Notice</span><span className="v">Immediate</span></div>
               </div>
             </div>
           </div>
