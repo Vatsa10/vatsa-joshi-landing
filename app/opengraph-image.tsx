@@ -109,7 +109,7 @@ export default function OpengraphImage() {
           }}
         >
           <span>vatsajoshi.in</span>
-          <span>Vadodara · IN</span>
+          <span>Bengaluru · IN</span>
         </div>
       </div>
     ),

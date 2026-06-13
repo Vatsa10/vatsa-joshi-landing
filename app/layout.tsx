@@ -36,7 +36,7 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://vatsajoshi.in";
 const SITE_NAME = "Vatsa Joshi — Portfolio";
 const DESCRIPTION =
-  "Vatsa Joshi is a full-stack AI engineer building agentic systems, RAG pipelines, and fine-tuned LLMs. Currently shipping legal AI at Promact on BharatLaw.ai.";
+  "Vatsa Joshi is a full-stack AI engineer building agentic systems, RAG pipelines, and fine-tuned LLMs. Previously shipped legal AI at Promact on BharatLaw.ai. Open to roles.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -67,7 +67,8 @@ export const metadata: Metadata = {
     "BharatLaw.ai",
     "legal AI",
     "Navrachana University",
-    "Vadodara",
+    "Bengaluru",
+    "Bangalore",
     "software engineer",
     "Python",
     "TypeScript",
@@ -130,11 +131,10 @@ const personJsonLd = {
   image: `${SITE_URL}/assets/vatsa.jpg`,
   jobTitle: "Software Engineer (AI)",
   description:
-    "Full-stack AI engineer specialising in agentic systems, RAG, and LLM fine-tuning.",
-  worksFor: {
-    "@type": "Organization",
-    name: "Promact Infotech",
-    url: "https://promactinfo.com",
+    "Full-stack AI engineer specialising in agentic systems, RAG, and LLM fine-tuning. Open to roles.",
+  seeks: {
+    "@type": "Demand",
+    name: "AI / ML Engineer roles",
   },
   alumniOf: {
     "@type": "CollegeOrUniversity",
@@ -143,8 +143,8 @@ const personJsonLd = {
   },
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Vadodara",
-    addressRegion: "Gujarat",
+    addressLocality: "Bengaluru",
+    addressRegion: "Karnataka",
     addressCountry: "IN",
   },
   nationality: { "@type": "Country", name: "India" },

@@ -121,7 +121,7 @@ export default function Home() {
         </nav>
         <div className="drawer-foot">
           <span className="drawer-avail"><span className="dot"></span>Available — Q3 2026</span>
-          <span className="drawer-loc">Vadodara · IN</span>
+          <span className="drawer-loc">Bengaluru · IN</span>
         </div>
       </aside>
 
@@ -155,7 +155,7 @@ export default function Home() {
             <div className="row"><span className="k">Role</span><span className="v">Software Engineer (AI)</span></div>
             <div className="row"><span className="k">Focus</span><span className="v">Agentic systems · RAG · LLM fine-tuning</span></div>
             <div className="row"><span className="k">Stack</span><span className="v">Python · TypeScript · Rust</span></div>
-            <div className="row"><span className="k">Based</span><span className="v">Vadodara, Gujarat (IN)</span></div>
+            <div className="row"><span className="k">Based</span><span className="v">Bengaluru, Karnataka (IN)</span></div>
           </div>
         </div>
 
@@ -300,7 +300,7 @@ export default function Home() {
                 <div className="r"><span className="k">Focus</span><span className="v">Agentic systems · RAG · LLM infra</span></div>
                 <div className="r"><span className="k">Stack</span><span className="v">Python · TypeScript · Rust</span></div>
                 <div className="r"><span className="k">Last role</span><span className="v">SWE Trainee (AI), Promact · Jan–2026 → ended</span></div>
-                <div className="r"><span className="k">Location</span><span className="v">Vadodara · open to relocate</span></div>
+                <div className="r"><span className="k">Location</span><span className="v">Bengaluru · open to relocate</span></div>
                 <div className="r"><span className="k">Mode</span><span className="v">On-site · Hybrid · Remote</span></div>
                 <div className="r"><span className="k">Notice</span><span className="v">Immediate</span></div>
               </div>
@@ -327,7 +327,7 @@ export default function Home() {
           <div className="xp-row">
             <div className="xp-date">JUN — DEC 2025</div>
             <div className="xp-role">Full-Stack Developer<span className="co">Hiraeth Tech · Vadodara</span></div>
-            <div className="xp-desc">Built scalable products with NestJS, Next.js, PostgreSQL; integrated LLM-based services and vector search into the web stack.</div>
+            <div className="xp-desc">Built scalable products with NestJS, Next.js, PostgreSQL. Retrofitted GenAI services — RAG chatbots, LLM-powered assistants, vector search — onto existing client production websites without breaking live deployments.</div>
             <div className="xp-side">Internship<br />6 months</div>
           </div>
           <div className="xp-row">
@@ -701,7 +701,7 @@ export default function Home() {
 
         <footer>
           <span>© Vatsa Joshi · 2026</span>
-          <span>Built in Vadodara · Last deploy 05/2026</span>
+          <span>Built in Bengaluru · Last deploy 05/2026</span>
           <span><a href="#home">Back to top ↑</a></span>
         </footer>
       </section>
