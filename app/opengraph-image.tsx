@@ -108,7 +108,7 @@ export default function OpengraphImage() {
             paddingTop: 16,
           }}
         >
-          <span>vatsajoshi.in</span>
+          <span>vatsa.online</span>
           <span>Bengaluru · IN</span>
         </div>
       </div>

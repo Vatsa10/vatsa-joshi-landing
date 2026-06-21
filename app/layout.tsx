@@ -33,7 +33,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://vatsajoshi.in";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://vatsa.online";
 const SITE_NAME = "Vatsa Joshi — Portfolio";
 const DESCRIPTION =
   "Vatsa Joshi is a full-stack AI engineer building agentic systems, RAG pipelines, and fine-tuned LLMs. Previously shipped legal AI at Promact on BharatLaw.ai. Open to roles.";
@@ -170,7 +170,7 @@ const personJsonLd = {
   sameAs: [
     "https://github.com/Vatsa10",
     "https://www.linkedin.com/in/vatsa-joshi",
-    "https://vatsajoshi.in",
+    "https://vatsa.online",
   ],
 };
 
