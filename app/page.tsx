@@ -149,7 +149,7 @@ export default function Home() {
 
         <div className="hero-tagrow">
           <p className="tag-lede reveal">
-            Full-stack engineer working at the seam between <em>large language models</em>, multi-agent systems, and the messy production infrastructure that has to carry them. Currently shipping legal AI at <b>Promact</b>.
+            Full-stack engineer working at the seam between <em>large language models</em>, multi-agent systems, and the messy production infrastructure that has to carry them. Previously shipped legal AI at <b>Promact</b>. Open to roles.
           </p>
           <div className="tag-meta reveal">
             <div className="row"><span className="k">Role</span><span className="v">Software Engineer (AI)</span></div>
@@ -319,10 +319,10 @@ export default function Home() {
 
         <div className="xp reveal stagger">
           <div className="xp-row">
-            <div className="xp-date">2026 — NOW</div>
+            <div className="xp-date">JAN — MAY 2026</div>
             <div className="xp-role">Software Engineer (AI)<span className="co">Promact · Vadodara</span></div>
             <div className="xp-desc">BharatLaw.ai — multi-agent petition drafting, legal intelligence platform, end-to-end document systems.</div>
-            <div className="xp-side">Full-time<br />Current</div>
+            <div className="xp-side">Full-time<br />Completed</div>
           </div>
           <div className="xp-row">
             <div className="xp-date">JUN — DEC 2025</div>
